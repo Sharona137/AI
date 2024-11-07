@@ -36,7 +36,15 @@ studentnummer = 1779443
     Schrijf je pseudocode keywords met alleen hoofdletters (ALS, VOOR, etc...).
 
 """
-#   TODO: [geef hier je antwoord]
+#   TODO: [geef hier je antwoord ->
+#    FUNCTIE CEIL(real):
+#     ALS real GELIJK IS AAN int(real):
+#         GEEF int(real) TERUG
+#     ANDERS ALS real GROTER DAN 0:
+#         GEEF int(real) + 1 TERUG
+#     ANDERS:
+#         GEEF int(real) TERUG]
+
 
 
 
@@ -50,9 +58,10 @@ studentnummer = 1779443
 def ceil(real):
     if real == int(real):
         return int(real)
+    elif real > 0:
+        return int(real) + 1  # Voor positieve getallen, naar boven afronden
     else:
-        return int(real) + 1
-
+        return int(real)
 
 """
     Bepaal het kleinste gehele getal (int), groter dan of gelijk aan het gegeven reeele getal (float).
@@ -63,8 +72,6 @@ def ceil(real):
     Returns:
         int: Het kleinste gehele getal (int), groter dan of gelijk aan het gegeven reeele getal (float).
     """
-    return 0
-
 
 """
 3. Implementatie is_even
@@ -72,9 +79,13 @@ def ceil(real):
 
 """
 
-
 def is_even(n):
-    """
+    if n % 2 == 0:
+        return True
+    else:
+        return False
+
+"""
     Bepaal of een geheel getal even is.
 
     Args:
@@ -83,7 +94,6 @@ def is_even(n):
     Returns:
         bool: True als even, False als oneven.
     """
-    return False
 
 
 """
@@ -94,7 +104,12 @@ def is_even(n):
 
 
 def is_odd(n):
-    """
+    if n % 2 != 0:
+        return True
+    else:
+        return False
+
+"""
     Bepaal of een geheel getal oneven is.
 
     Args:
@@ -103,7 +118,6 @@ def is_odd(n):
     Returns:
         bool: True als oneven, False als even.
     """
-    return False
 
 
 """
@@ -114,7 +128,20 @@ def is_odd(n):
 
 
 def nround(real):
-    """
+    if real >= 0:
+        # Voor positieve getallen of 0: normaal afronden
+        if real - int(real) >= 0.5:
+            return int(real) + 1  # Rond naar boven als het decimale deel >= 0.5 is
+        else:
+            return int(real)
+    else:
+        # Voor negatieve getallen: omgekeerd afronden
+        if abs(real - int(real)) >= 0.5:
+            return int(real) - 1  # Rond naar beneden als het decimale deel >= 0.5 is
+        else:
+            return int(real)
+
+"""
     Bepaal het gehele getal (int) dat het dichtst bij het gegeven reeele getal (float) zit.
 
     Args:
@@ -123,8 +150,6 @@ def nround(real):
     Returns:
         int: Het gehele getal (int) dat het dichtst bij het gegeven reeele getal (float) zit.
     """
-
-    return 0
 
 
 """
@@ -135,7 +160,18 @@ def nround(real):
 
 
 def dec2bin(n):
-    """
+    if n == 0:
+        return (0,)
+
+    binair = []
+    while n > 0:
+        rest = n % 2  # Vind het volgende bit door modulo 2
+        binair.insert(0, rest)  # Voeg het bit vooraan toe (linksbouwend)
+        n = n // 2  # Deel het getal door 2 om verder te gaan
+
+    return tuple(binair)
+
+"""
     Bepaal de binaire representatie van een getal uit het decimale talstelsel.
 
     Args:
@@ -157,8 +193,6 @@ def dec2bin(n):
         >> dec2bin(16)
         (1, 0, 0, 0, 0)
     """
-    return (0,)
-
 
 """
 7. Implementatie sqrt_heron
@@ -167,7 +201,19 @@ def dec2bin(n):
 
 
 def sqrt_heron(n, tolerantie=0.00000001):
-    """
+    if n < 0:
+        raise ValueError("n moet een positief getal zijn.")
+
+        # Initialiseer resultaat als het gegeven getal
+    resultaat = n
+
+    # Itereer tot het kwadraat van resultaat binnen de tolerantie van n ligt
+    while abs((resultaat ** 2) - n) > tolerantie:
+        resultaat = (resultaat + n / resultaat) / 2
+
+    return resultaat
+
+"""
     Bepaal de vierkantswortel van een gegeven waarde n met de methode van Heron: https://nl.wikipedia.org/wiki/Methode_van_Heron.
     De methode benadert de vierkantswortel en convergeert naar de daadwerkelijke waarde.
     Implementeer volgens onderstaande pseudocode:
@@ -186,7 +232,6 @@ def sqrt_heron(n, tolerantie=0.00000001):
         float: De benaderde vierkantswortel
 
     """
-    return 0
 
 
 """
@@ -197,8 +242,8 @@ def sqrt_heron(n, tolerantie=0.00000001):
 """
 
 
-# def meetkundige_rij(start, factor, exponent):
-#     """
+#def meetkundige_rij(start, factor, exponent):
+#    """
 #     Bereken een meetkundige rij (a_n = a_0 · r^n) gegeven een startgetal, een factor en een exponent.
 #
 #     Args:
