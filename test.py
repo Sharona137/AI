@@ -56,12 +56,12 @@ studentnummer = 1779443
 
 
 def ceil(real):
-    if real == int(real):
+    if real == int(real):     # Als het getal een integer is dan wordt het niet afgerond want het is al afgerond
         return int(real)
     elif real > 0:
         return int(real) + 1  # Voor positieve getallen, naar boven afronden
     else:
-        return int(real)
+        return int(real)      # Voor negatieve getallen, naar beneden afronden
 
 """
     Bepaal het kleinste gehele getal (int), groter dan of gelijk aan het gegeven reeele getal (float).
@@ -81,9 +81,9 @@ def ceil(real):
 
 def is_even(n):
     if n % 2 == 0:
-        return True
+        return True     # Als er niks overblijft na het delen, dan is n een geheel getal
     else:
-        return False
+        return False    # Als er een rest overblijft na het delen, dan is n een oneven getal
 
 """
     Bepaal of een geheel getal even is.
@@ -105,9 +105,9 @@ def is_even(n):
 
 def is_odd(n):
     if n % 2 != 0:
-        return True
+        return True     # n is een oneven getal
     else:
-        return False
+        return False    # n is een geheel getal
 
 """
     Bepaal of een geheel getal oneven is.
@@ -165,9 +165,9 @@ def dec2bin(n):
 
     binair = []
     while n > 0:
-        rest = n % 2  # Vind het volgende bit door modulo 2
-        binair.insert(0, rest)  # Voeg het bit vooraan toe (linksbouwend)
-        n = n // 2  # Deel het getal door 2 om verder te gaan
+        rest = n % 2                        # Vind het volgende bit door modulo 2
+        binair.insert(0, rest)      # Voeg het bit vooraan toe (linksbouwend)
+        n = n // 2                          # Deel het getal door 2 om verder te gaan
 
     return tuple(binair)
 
@@ -202,16 +202,16 @@ def dec2bin(n):
 
 def sqrt_heron(n, tolerantie=0.00000001):
     if n < 0:
-        raise ValueError("n moet een positief getal zijn.")
+        raise ValueError("n moet een positief getal zijn.")         # Het getal moet positief zijn
 
-        # Initialiseer resultaat als het gegeven getal
+        # n is het begin getal
     resultaat = n
 
-    # Itereer tot het kwadraat van resultaat binnen de tolerantie van n ligt
+    # Formule van Heron
     while abs((resultaat ** 2) - n) > tolerantie:
         resultaat = (resultaat + n / resultaat) / 2
 
-    return resultaat
+    return float(resultaat)
 
 """
     Bepaal de vierkantswortel van een gegeven waarde n met de methode van Heron: https://nl.wikipedia.org/wiki/Methode_van_Heron.
